@@ -1,4 +1,15 @@
 # Delights
+
+
+(creation of all is still in progress)
+
+
+
+
+
+
+
+
 The ultimate aim of the canteen management app is to automate the
 existing traditional system which is manual, with the support of Android App
 and full-featured Mobile applications, so that their valuable data can be
