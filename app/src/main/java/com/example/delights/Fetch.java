@@ -21,6 +21,7 @@ public class Fetch extends AppCompatActivity {
             public void onClick(View v) {
                 Intent a = new Intent(Fetch.this,Register.class);
                 startActivity(a);
+                finish();
 
             }
         });
@@ -30,6 +31,7 @@ public class Fetch extends AppCompatActivity {
             public void onClick(View v) {
                 Intent b = new Intent(Fetch.this,Login.class);
                 startActivity(b);
+                finish();
 
             }
         });

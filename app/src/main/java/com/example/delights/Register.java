@@ -18,9 +18,10 @@ public class Register extends AppCompatActivity {
         register_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Register.this,Fetch.class);
+                Intent i = new Intent(Register.this,profile.class);
                 startActivity(i);
-                Toast.makeText(Register.this, "You have been Successfully Registered", Toast.LENGTH_SHORT).show();
+                finish();
+                Toast.makeText(Register.this, "Please Complete Your Profile", Toast.LENGTH_SHORT).show();
             }
         });
 
