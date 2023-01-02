@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class profile extends AppCompatActivity {
@@ -16,22 +19,45 @@ public class profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        // All declarations
         AutoCompleteTextView atv = findViewById(R.id.profile_branch);
-        String [] Branch = new String[] {"AI-DS","COMPS","CIVIL","MECH","CHEM","CIVIL-INFRA","IT","ELEC" };
-        atv.setAdapter(new ArrayAdapter<String>(profile.this, android.R.layout.simple_list_item_1,Branch));
+        TextView email = findViewById(R.id.profile_email);
+        EditText profile_name = findViewById(R.id.profile_name);
+        EditText profile_number = findViewById(R.id.profile_number);
+        Button save = findViewById(R.id.profile_button);
+       // set autofill for branch
+        String [] Branch = new String[]
+                {"AI-DS_FE","AI-DS_SE","AI-DS_TE","AI-DS_BE",
+                        "COMPS_FE","COMPS_SE","COMPS_TE","COMPS_BE",
+                        "CIVIL_FE","CIVIL_SE","CIVIL_TE","CIVIL_BE",
+                        "MECH_FE","MECH_SE","MECH_TE","MECH_BE",
+                        "CHEM_FE","CHEM_SE","CHEM_TE","CHEM_BE", "CIVIL-INFRA_FE","CIVIL-INFRA_SE","CIVIL-INFRA_TE","CIVIL-INFRA_BE", "IT_FE","IT_SE","IT_TE","IT_BE", "ELEC_FE","ELEC_SE","ELEC_TE","ELEC_BE" };
 
-        Button save = findViewById(R.id.profilr_button);
+        atv.setAdapter(new ArrayAdapter<String>(profile.this, android.R.layout.simple_list_item_1,Branch));
+        // set email from register to this activity without changes using textview
+        Intent intent = getIntent();
+        String profile_email = intent.getStringExtra(Register.EXTRA_NAME);
+        email.setText(profile_email);
+        //Conditions to check if the name and number is empty or not
         save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent a = new Intent(profile.this,Fetch.class);
-                startActivity(a);
-                finish();
-                Toast.makeText(profile.this, "You have been Successfully been Registered", Toast.LENGTH_SHORT).show();
+            public void onClick(View v)
+            {
+                String name = profile_name.getText().toString();
+                String number= profile_number.getText().toString();
 
+                if(TextUtils.isEmpty(name)||TextUtils.isEmpty(number))
+                {
+                    Toast.makeText(profile.this, "Please provide valid details", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent a = new Intent(profile.this, Fetch.class);
+                    startActivity(a);
+                    finish();
+                    Toast.makeText(profile.this, "Your profile have been created successfully", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-
     }
 }

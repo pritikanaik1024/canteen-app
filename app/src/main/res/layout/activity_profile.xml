@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".profile">
+    tools:context=".profile"
+    tools:visibility="visible">
 
     <TextView
         android:id="@+id/textView4"
@@ -39,25 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <EditText
-        android:id="@+id/profile_emailid"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="33dp"
-        android:ems="10"
-        android:hint="Enter your Email Address"
-        android:inputType="textEmailAddress"
-        android:textAlignment="center"
-        android:textColor="#FF5757"
-        android:textColorHint="#FF5757"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <AutoCompleteTextView
         android:id="@+id/profile_branch"
         android:layout_width="350dp"
@@ -75,18 +57,15 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_name" />
 
     <Button
-        android:id="@+id/profilr_button"
+        android:id="@+id/profile_button"
         android:layout_width="113dp"
         android:layout_height="56dp"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="162dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/button_gradient"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_emailid" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_email" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -109,7 +88,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/profile_number"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginStart="33dp"
@@ -124,5 +103,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_branch" />
+
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="31dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#FF5757"
+        android:textColorHint="#FF5757"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

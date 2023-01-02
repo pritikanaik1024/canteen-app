@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "490695833221",
+    "project_id": "delights-e403e",
+    "storage_bucket": "delights-e403e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490695833221:android:2d982d327b52bae5c5dbec",
+        "android_client_info": {
+          "package_name": "com.example.delights"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490695833221-bt4vmctrme84m22hou7h3a6jepintd2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiqKr8x6iCKJ09K-NQYoalQemNzIzugVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490695833221-bt4vmctrme84m22hou7h3a6jepintd2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

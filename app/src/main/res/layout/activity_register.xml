@@ -23,9 +23,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="301dp"
-        android:layout_height="59dp"
+        android:id="@+id/register_email"
+        android:layout_width="374dp"
+        android:layout_height="63dp"
         android:layout_marginTop="92dp"
         android:ems="10"
         android:hint="Enter your Email"
@@ -38,19 +38,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="299dp"
-        android:layout_height="60dp"
+        android:id="@+id/register_password"
+        android:layout_width="375dp"
+        android:layout_height="66dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Enter your password"
-        android:inputType="textPassword"
+        android:inputType="textVisiblePassword|textPassword"
         android:textAlignment="center"
         android:textColor="#FF5757"
         android:textColorHint="#FF5757"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
     <Button
         android:id="@+id/register_2"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/register_password" />
 
     <CheckBox
         android:id="@+id/checkBox"

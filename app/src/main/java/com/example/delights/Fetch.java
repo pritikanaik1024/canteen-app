@@ -31,7 +31,6 @@ public class Fetch extends AppCompatActivity {
             public void onClick(View v) {
                 Intent b = new Intent(Fetch.this,Login.class);
                 startActivity(b);
-                finish();
 
             }
         });
