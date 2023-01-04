@@ -13,18 +13,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class profile extends AppCompatActivity {
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
+public class profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
         // All declarations
+        EditText profile_Name = findViewById(R.id.profile_name);
+        EditText profile_number = findViewById(R.id.profile_number);
         AutoCompleteTextView atv = findViewById(R.id.profile_branch);
         TextView email = findViewById(R.id.profile_email);
-        EditText profile_name = findViewById(R.id.profile_name);
-        EditText profile_number = findViewById(R.id.profile_number);
         Button save = findViewById(R.id.profile_button);
+
        // set autofill for branch
         String [] Branch = new String[]
                 {"AI-DS_FE","AI-DS_SE","AI-DS_TE","AI-DS_BE",
@@ -35,16 +41,19 @@ public class profile extends AppCompatActivity {
 
         atv.setAdapter(new ArrayAdapter<String>(profile.this, android.R.layout.simple_list_item_1,Branch));
         // set email from register to this activity without changes using textview
+
         Intent intent = getIntent();
         String profile_email = intent.getStringExtra(Register.EXTRA_NAME);
         email.setText(profile_email);
+
         //Conditions to check if the name and number is empty or not
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                String name = profile_name.getText().toString();
+                String name = profile_Name.getText().toString();
                 String number= profile_number.getText().toString();
+
 
                 if(TextUtils.isEmpty(name)||TextUtils.isEmpty(number))
                 {
@@ -55,9 +64,29 @@ public class profile extends AppCompatActivity {
                     Intent a = new Intent(profile.this, Fetch.class);
                     startActivity(a);
                     finish();
+                    DocumentCreate();
                     Toast.makeText(profile.this, "Your profile have been created successfully", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+    // FirebaseFirestore link of profile
+    public void DocumentCreate() {
+
+        EditText profile_Name = findViewById(R.id.profile_name);
+        EditText profile_number = findViewById(R.id.profile_number);
+        AutoCompleteTextView atv = findViewById(R.id.profile_branch);
+        String name = profile_Name.getText().toString();
+        String number= profile_number.getText().toString();
+        Intent intent = getIntent();
+        String branch = atv.getText().toString();
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("name",name);
+        map.put("Roll Number",number);
+        map.put("email",intent.getStringExtra(Register.EXTRA_NAME));
+        map.put("Branch",branch);
+
+        FirebaseFirestore.getInstance().collection("Profile Information").add(map);
     }
 }
