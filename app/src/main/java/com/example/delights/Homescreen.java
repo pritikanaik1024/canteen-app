@@ -20,7 +20,7 @@ public class Homescreen extends AppCompatActivity {
         cart_navigation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent a = new Intent(Homescreen.this,cart.class);
+                Intent a = new Intent(Homescreen.this,pay.class);
                 startActivity(a);
                 finish();
             }
