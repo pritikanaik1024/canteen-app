@@ -8,11 +8,29 @@
     tools:context=".profile"
     tools:visibility="visible">
 
+    <EditText
+        android:id="@+id/profile_gr_number"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="33dp"
+        android:ems="10"
+        android:hint="Enter Your  GR Number"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="#FF5757"
+        android:textColorHint="#FF5757"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_branch" />
+
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="321dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="196dp"
+        android:layout_width="333dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="180dp"
         android:fontFamily="@font/acme"
         android:text="Create Your Profile"
         android:textAlignment="center"
@@ -27,7 +45,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="33dp"
         android:ems="10"
         android:hint="Enter Your Name"
@@ -36,7 +54,7 @@
         android:textColor="#FF5757"
         android:textColorHint="#FF5757"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -45,37 +63,27 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="33dp"
         android:hint="Specify your Banch"
         android:textAlignment="center"
         android:textColor="@color/red_background"
         android:textColorHint="@color/red_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_name" />
 
     <Button
         android:id="@+id/profile_button"
-        android:layout_width="113dp"
-        android:layout_height="56dp"
+        android:layout_width="115dp"
+        android:layout_height="61dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/button_gradient"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_email" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="261dp"
-        android:layout_height="250dp"
-        android:layout_marginEnd="240dp"
-        android:layout_marginBottom="572dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/salad_plate" />
 
     <TextView
         android:id="@+id/textView5"
@@ -92,7 +100,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="33dp"
         android:ems="10"
         android:hint="Enter Your Roll number"
@@ -101,15 +109,16 @@
         android:textColor="@color/red_background"
         android:textColorHint="@color/red_background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_branch" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_gr_number" />
 
     <TextView
         android:id="@+id/profile_email"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginStart="33dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="31dp"
         android:text="TextView"
         android:textAlignment="center"
@@ -117,8 +126,18 @@
         android:textColorHint="#FF5757"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_number" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="250dp"
+        android:layout_height="245dp"
+        android:layout_marginEnd="280dp"
+        android:layout_marginBottom="528dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/salad_profile_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

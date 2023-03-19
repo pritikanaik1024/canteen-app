@@ -43,7 +43,7 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
 
             Checkout checkout = new Checkout();
             checkout.setKeyID("rzp_test_Ww6qbnSXWQ3pNZ");
-            checkout.setImage(R.drawable.delights_splash);
+            checkout.setImage(R.drawable.logo);
             final Activity activity = this;
             try {
                 JSONObject options = new JSONObject();
@@ -72,11 +72,12 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
 
     @Override
     public void onPaymentSuccess(String s) {
-        pay_id.setText("payment is sucessful"+s);
+        pay_id.setText("Congratulations your payment is sucessful and payment id is: "+  s);
+
     }
 
     @Override
     public void onPaymentError(int i, String s) {
-        pay_id.setText("payment is unsucessful"+s);
+        pay_id.setText("Oops! your payment is unsucessful and payment id is: "+  s);
     }
 }

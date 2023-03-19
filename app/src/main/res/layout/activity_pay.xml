@@ -11,8 +11,7 @@
         android:id="@+id/pay_id"
         android:layout_width="355dp"
         android:layout_height="171dp"
-        android:layout_marginTop="124dp"
-        android:text="TextView"
+        android:layout_marginTop="232dp"
         android:textAlignment="center"
         android:textColor="#FF5757"
         android:textColorHint="#FF5757"
@@ -23,12 +22,11 @@
 
     <Button
         android:id="@+id/pay_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginEnd="162dp"
-        android:text="Button"
+        android:layout_width="167dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/button_gradient"
+        android:text="Make Payment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pay_id" />

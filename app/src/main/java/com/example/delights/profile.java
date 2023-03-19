@@ -30,6 +30,7 @@ public class profile extends AppCompatActivity {
         AutoCompleteTextView atv = findViewById(R.id.profile_branch);
         TextView email = findViewById(R.id.profile_email);
         Button save = findViewById(R.id.profile_button);
+        EditText profile_gr = findViewById(R.id.profile_gr_number);
 
        // set autofill for branch
         String [] Branch = new String[]
@@ -53,9 +54,10 @@ public class profile extends AppCompatActivity {
             {
                 String name = profile_Name.getText().toString();
                 String number= profile_number.getText().toString();
+                String gr = profile_gr.getText().toString();
 
 
-                if(TextUtils.isEmpty(name)||TextUtils.isEmpty(number))
+                if(TextUtils.isEmpty(name)||TextUtils.isEmpty(number)||TextUtils.isEmpty(gr))
                 {
                     Toast.makeText(profile.this, "Please provide valid details", Toast.LENGTH_SHORT).show();
                 }
@@ -73,20 +75,30 @@ public class profile extends AppCompatActivity {
     // FirebaseFirestore link of profile
     public void DocumentCreate() {
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         EditText profile_Name = findViewById(R.id.profile_name);
         EditText profile_number = findViewById(R.id.profile_number);
         AutoCompleteTextView atv = findViewById(R.id.profile_branch);
+        EditText profile_gr_number = findViewById(R.id.profile_gr_number);
         String name = profile_Name.getText().toString();
         String number= profile_number.getText().toString();
+        String gr = profile_gr_number.getText().toString();
         Intent intent = getIntent();
         String branch = atv.getText().toString();
 
         Map<String,Object> map = new HashMap<>();
         map.put("name",name);
         map.put("Roll Number",number);
+        map.put("GR Number",gr);
         map.put("email",intent.getStringExtra(Register.EXTRA_NAME));
         map.put("Branch",branch);
 
-        FirebaseFirestore.getInstance().collection("Profile Information").add(map);
+
+        db.collection("Users").document(gr)
+                .collection("User_info").document(intent.getStringExtra(Register.EXTRA_NAME)).set(map);
+
+
+//        FirebaseFirestore.getInstance().collection("Profile Information").add(map);
     }
 }

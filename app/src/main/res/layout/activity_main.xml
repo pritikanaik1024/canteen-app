@@ -7,16 +7,17 @@
     android:background="@color/red_background"
     tools:context=".MainActivity">
 
-
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="384dp"
-        android:layout_height="492dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="87dp"
+        android:layout_marginBottom="144dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.397"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/delights_splash" />
 </androidx.constraintlayout.widget.ConstraintLayout>

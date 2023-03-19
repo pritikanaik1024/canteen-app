@@ -24,13 +24,15 @@
 
     <EditText
         android:id="@+id/register_email"
-        android:layout_width="374dp"
-        android:layout_height="63dp"
+        android:layout_width="335dp"
+        android:layout_height="73dp"
         android:layout_marginTop="92dp"
+        android:drawableStart="@drawable/baseline_person_24"
         android:ems="10"
-        android:hint="Enter your Email"
-        android:inputType="textEmailAddress"
+        android:hint=" Enter your Email"
         android:textAlignment="center"
+        android:inputType="textEmailAddress"
+
         android:textColor="#FF5757"
         android:textColorHint="#FF5757"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,16 +41,18 @@
 
     <EditText
         android:id="@+id/register_password"
-        android:layout_width="375dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="341dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="24dp"
+        android:drawableStart="@drawable/baseline_lock_24"
         android:ems="10"
-        android:hint="Enter your password"
-        android:inputType="textVisiblePassword|textPassword"
+        android:hint=" Enter your password"
         android:textAlignment="center"
+        android:inputType="textVisiblePassword|textPassword"
         android:textColor="#FF5757"
         android:textColorHint="#FF5757"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
@@ -68,7 +72,7 @@
         android:id="@+id/checkBox"
         android:layout_width="342dp"
         android:layout_height="76dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="52dp"
         android:buttonTint="#F44336"
         android:checked="false"
         android:text="By registering you accept our terms and conditions"
@@ -81,11 +85,12 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="314dp"
-        android:layout_height="302dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginBottom="520dp"
+        android:layout_width="389dp"
+        android:layout_height="320dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginBottom="456dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/samosa" />
+        app:srcCompat="@drawable/samosa_register" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

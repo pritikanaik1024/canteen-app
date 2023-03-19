@@ -8,20 +8,12 @@
     android:background="#FFFFFF"
     tools:context=".Login">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="417dp"
-        android:layout_height="305dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/login" />
-
     <EditText
         android:id="@+id/login_email"
         android:layout_width="353dp"
         android:layout_height="55dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="57dp"
+        android:drawableStart="@drawable/baseline_person_24"
         android:ems="10"
         android:hint="Enter your Email"
         android:inputType="textEmailAddress"
@@ -41,6 +33,7 @@
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Enter your Password"
+        android:drawableStart="@drawable/baseline_lock_24"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textAlignment="center"
@@ -76,4 +69,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="409dp"
+        android:layout_height="304dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/login_background" />
 </androidx.constraintlayout.widget.ConstraintLayout>
