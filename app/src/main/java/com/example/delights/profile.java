@@ -13,12 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class profile extends AppCompatActivity {
+
+    FirebaseAuth auth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +79,7 @@ public class profile extends AppCompatActivity {
     public void DocumentCreate() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        String uid = auth.getUid();
         EditText profile_Name = findViewById(R.id.profile_name);
         EditText profile_number = findViewById(R.id.profile_number);
         AutoCompleteTextView atv = findViewById(R.id.profile_branch);
@@ -94,9 +97,13 @@ public class profile extends AppCompatActivity {
         map.put("email",intent.getStringExtra(Register.EXTRA_NAME));
         map.put("Branch",branch);
 
+        Map<String, String> admin_map = new HashMap<>();
+        admin_map.put("is_admin","0");
 
-        db.collection("Users").document(gr)
-                .collection("User_info").document(intent.getStringExtra(Register.EXTRA_NAME)).set(map);
+
+        db.collection("Users").document(auth.getUid()).set(admin_map);
+        db.collection("Users").document(auth.getUid()).collection(gr)
+                .document(intent.getStringExtra(Register.EXTRA_NAME)).set(map);
 
 
 //        FirebaseFirestore.getInstance().collection("Profile Information").add(map);
