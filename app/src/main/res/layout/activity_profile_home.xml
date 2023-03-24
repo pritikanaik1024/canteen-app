@@ -4,31 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".pay">
+    tools:context=".profile_home">
 
     <TextView
-        android:id="@+id/pay_id"
-        android:layout_width="match_parent"
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="50dp"
-        android:textAlignment="center"
-        android:textColor="#FF5757"
-        android:textColorHint="#FF5757"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/pay_btn"
-        android:layout_width="167dp"
-        android:layout_height="69dp"
-        android:layout_alignBottom="@+id/pay_id"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="-167dp"
-        android:background="@drawable/button_gradient"
-        android:text="Make Payment" />
+        android:text="profile activity"
+        android:layout_centerInParent="true"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
@@ -40,5 +23,4 @@
         app:itemTextColor="@drawable/selector"
         app:itemIconTint="@drawable/selector"
         />
-
 </RelativeLayout>

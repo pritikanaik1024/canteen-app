@@ -1,14 +1,19 @@
 package com.example.delights;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
@@ -19,6 +24,7 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
     TextView pay_id ;
     Button pay_btn ;
     private Checkout checkout;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,32 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
 
         pay_id = findViewById(R.id.pay_id);
         pay_btn = findViewById(R.id.pay_btn);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.cart_nav);
+
+        bottomNavigationView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.cart_nav:
+                        break;
+
+                    case R.id.token_nav:
+                        startActivity(new Intent(getApplicationContext(),token.class));
+                        overridePendingTransition(0,0);
+                        break;
+
+                    case R.id.profile_nav:
+                        startActivity(new Intent(getApplicationContext(),profile_home.class));
+                        overridePendingTransition(0,0);
+                        break;
+                }
+
+
+            }
+        });
+
 
         pay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +110,10 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
 
     @Override
     public void onPaymentError(int i, String s) {
-        pay_id.setText("Oops! your payment is unsucessful and payment id is: "+  s);
+        pay_id.setText("Oops! your payment is unsucessful");
     }
 }
+
+
+
+
