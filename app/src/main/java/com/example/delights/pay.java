@@ -21,6 +21,8 @@ import org.json.JSONObject;
 
 public class pay extends AppCompatActivity implements PaymentResultListener {
 
+    public static final String EXTRA_NUMBER = ("com.example.delights.extra.NUMBER");
+
     TextView pay_id ;
     Button pay_btn ;
     private Checkout checkout;
@@ -105,13 +107,34 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
     @Override
     public void onPaymentSuccess(String s) {
         pay_id.setText("Congratulations your payment is sucessful and payment id is: "+  s);
-
+        int token = IncrementingNumber.getNextNumber();
+        String token_number = Integer.toString(token);
+        Intent a = new Intent();
+        a.putExtra(EXTRA_NUMBER,token_number);
     }
 
     @Override
     public void onPaymentError(int i, String s) {
         pay_id.setText("Oops! your payment is unsucessful");
     }
+
+
+    public static class IncrementingNumber {
+
+        private static int number = 0;
+
+        public static int getNextNumber() {
+            number = (number % 100) + 1;
+            return number;
+        }
+
+    }
+
+
+
+
+
+
 }
 
 

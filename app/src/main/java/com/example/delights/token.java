@@ -1,5 +1,7 @@
 package com.example.delights;
 
+import static com.example.delights.pay.EXTRA_NUMBER;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,11 +9,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class token extends AppCompatActivity {
 
+    TextView token ;
     BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingInflatedId")
@@ -19,7 +23,11 @@ public class token extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token);
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        token = findViewById(R.id.token);
+
+
         bottomNavigationView.setSelectedItemId(R.id.token_nav);
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
@@ -43,6 +51,8 @@ public class token extends AppCompatActivity {
             }
         });
 
-
+            Intent b = getIntent();
+            String token_no = b.getStringExtra(EXTRA_NUMBER);
+            token.setText(token_no);
     }
 }
