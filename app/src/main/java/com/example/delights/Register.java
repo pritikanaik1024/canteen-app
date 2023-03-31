@@ -80,4 +80,6 @@ public class Register extends AppCompatActivity {
       });
     }
 
+    public static class MainModel {
+    }
 }

@@ -1,18 +1,27 @@
 {
   "project_info": {
     "project_number": "490695833221",
+    "firebase_url": "https://delights-e403e-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "delights-e403e",
     "storage_bucket": "delights-e403e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:490695833221:android:2d982d327b52bae5c5dbec",
+        "mobilesdk_app_id": "1:490695833221:android:e5c6bf5c8c82097ac5dbec",
         "android_client_info": {
           "package_name": "com.example.delights"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "490695833221-s8j1e17d80sotijkk8or0ob26n6qs0sv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.delights",
+            "certificate_hash": "4077935f97d09396b619530226ce05c9c0503b04"
+          }
+        },
         {
           "client_id": "490695833221-bt4vmctrme84m22hou7h3a6jepintd2i.apps.googleusercontent.com",
           "client_type": 3
