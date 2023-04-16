@@ -14,7 +14,7 @@
         android:padding="15dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img"
+            android:id="@+id/admin_img"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerVertical="true"
@@ -23,56 +23,75 @@
             app:civ_border_width="2dp" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/admin_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_toEndOf="@id/img"
+            android:layout_toEndOf="@id/admin_img"
             android:text="Food Name"
             android:textColor="#000000"
             android:textSize="18dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/rupee"
+            android:id="@+id/admin_rupee"
             android:layout_width="145dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/name"
+            android:layout_alignBottom="@+id/admin_name"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="-38dp"
-            android:layout_toEndOf="@id/img"
+            android:layout_toEndOf="@id/admin_img"
             android:text="₹"
             android:textColor="#000000"
             android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/admin_price"
             android:layout_width="215dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/name"
+            android:layout_alignBottom="@+id/admin_name"
             android:layout_marginStart="-133dp"
             android:layout_marginBottom="-38dp"
-            android:layout_toEndOf="@id/rupee"
+            android:layout_toEndOf="@id/admin_rupee"
             android:text="Food price"
             android:textColor="#000000"
             android:textSize="16dp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/add_cart"
-            android:layout_width="268dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/price"
+            android:layout_alignBottom="@+id/admin_rupee"
             android:layout_marginStart="28dp"
+            android:layout_marginTop="-58dp"
             android:layout_marginEnd="28dp"
-            android:layout_marginBottom="-60dp"
-            android:layout_toEndOf="@id/img"
-            android:backgroundTint="#32CD32"
-            android:paddingStart="48dp"
-            android:text="        Add to cart"
-            android:textAlignment="viewStart"
-            tools:ignore="RtlSymmetry" />
+            android:layout_marginBottom="-58dp"
+            android:layout_toEndOf="@id/admin_img"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/update"
+                android:layout_width="120dp"
+                android:textColor="@color/white"
+                android:layout_height="48dp"
+                android:text="Update"
+                android:backgroundTint="@color/red_background"/>
+
+            <Button
+                android:id="@+id/delete"
+                android:textColor="@color/white"
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Delete"
+                android:backgroundTint="@color/red_background"/>
+
+
+
+        </LinearLayout>
+
 
 
     </RelativeLayout>

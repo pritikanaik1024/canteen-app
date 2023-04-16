@@ -63,4 +63,50 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
 
         }
     }
+
+    public static class MainModel_admin {
+
+
+
+        String name,price,uri;
+
+
+        MainModel_admin()
+        {
+
+
+        }
+
+        public MainModel_admin(String name, String price, String uri) {
+            this.name = name;
+            this.price = price;
+            this.uri = uri;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public String getUri() {
+            return uri;
+        }
+
+
+    }
 }

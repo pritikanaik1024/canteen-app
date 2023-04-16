@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin_add">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:src="@drawable/admin_gifs_add"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="ADD ITEMS"
+            android:background="@color/red_background"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="FOOD"/>
+
+        <EditText
+            android:id="@+id/food_add"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded"
+            android:gravity="center"
+            android:inputType="textShortMessage"
+            android:singleLine="true"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="PRICE"/>
+
+        <EditText
+            android:id="@+id/price_add"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded"
+            android:gravity="center"
+            android:inputType="numberSigned"
+            android:singleLine="true"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="IMAGE URL"/>
+
+        <EditText
+            android:id="@+id/uri_add"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded"
+            android:gravity="center"
+            android:inputType="textUri"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:text="Add Item"
+            android:background="@drawable/button_gradient"
+            android:textSize="21dp"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:id="@+id/admin_add"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:text="Back"
+            android:background="@drawable/button_gradient"
+            android:textSize="21dp"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:id="@+id/back_add"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
