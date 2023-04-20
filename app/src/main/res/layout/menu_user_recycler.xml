@@ -70,7 +70,7 @@
             android:layout_toEndOf="@id/img"
             android:backgroundTint="#32CD32"
             android:paddingStart="48dp"
-            android:text="        Add to cart"
+            android:text="             Order"
             android:textAlignment="viewStart"
             tools:ignore="RtlSymmetry" />
 

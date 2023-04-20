@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".post_login"
+    android:background="@color/red_background">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="50dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="250dp"
+                android:layout_height="76dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="75dp"
+                android:fontFamily="@font/aref_ruqaa_bold"
+                android:text="Delight's"
+                android:textColor="#0C0C0C"
+                android:textSize="48sp" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/chef_toss" />
+
+            <Button
+                android:id="@+id/change"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:text="LET'S ORDER"
+                android:layout_marginTop="630dp"
+                android:layout_marginStart="110dp"
+                android:background="@drawable/button_gradient"
+                app:elevation="40dp"/>
+
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

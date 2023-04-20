@@ -89,5 +89,4 @@
         android:gravity="center"
        android:id="@+id/admin_update"/>
 
-
 </LinearLayout>

@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
 
                 }
                 if (Objects.equals(documentSnapshot.getString("is_admin"), "0")) {
-                    Intent a = new Intent(Login.this, homepage.class);
+                    Intent a = new Intent(Login.this, post_login.class);
                     startActivity(a);
                     finish();
                     Toast.makeText(Login.this, "successfully logged", Toast.LENGTH_SHORT).show();

@@ -64,6 +64,7 @@ public class  Admin_menu_Adapter extends FirebaseRecyclerAdapter<MainModel,Admin
 
 
                 View view = dialogPlus.getHolderView();
+
                 EditText Food = view.findViewById(R.id.food_update);
                 EditText Price = view.findViewById(R.id.price_update);
                 EditText Url = view.findViewById(R.id.uri_update);
