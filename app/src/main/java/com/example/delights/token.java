@@ -36,6 +36,7 @@ public class token extends AppCompatActivity {
                 {
                     case R.id.cart_nav:
                         startActivity(new Intent(getApplicationContext(),pay.class));
+                        finish();
                         overridePendingTransition(0,0);
                         break;
                     case R.id.token_nav:
@@ -43,6 +44,13 @@ public class token extends AppCompatActivity {
 
                     case R.id.profile_nav:
                         startActivity(new Intent(getApplicationContext(),profile_home.class));
+                        finish();
+                        overridePendingTransition(0,0);
+                        break;
+
+                    case R.id.home_nav:
+                        startActivity(new Intent(getApplicationContext(),homepage.class));
+                        finish();
                         overridePendingTransition(0,0);
                         break;
 

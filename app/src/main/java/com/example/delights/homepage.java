@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,22 +31,30 @@ public class homepage extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.cart_nav:
                         startActivity(new Intent(getApplicationContext(), pay.class));
-                        overridePendingTransition(0, 0);
+                        finish();
+                        overridePendingTransition(1, 1);
                         break;
                     case R.id.token_nav:
                         startActivity(new Intent(getApplicationContext(), token.class));
-                        overridePendingTransition(0, 0);
+                        finish();
+                        overridePendingTransition(1, 1);
                         break;
 
                     case R.id.profile_nav:
                         startActivity(new Intent(getApplicationContext(), profile_home.class));
-                        overridePendingTransition(0, 0);
+                        finish();
+                        overridePendingTransition(1, 1);
+                        break;
+
+                    case R.id.home_nav:
                         break;
 
                 }
 
             }
         });
+
+
 
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

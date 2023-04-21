@@ -1,0 +1,52 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "7288401c457455b011ce53794c814484",
+    "entities": [
+      {
+        "tableName": "relation",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`fid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `food_name` TEXT, `quantity` TEXT, `Total_price` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "fid",
+            "columnName": "fid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Food_name",
+            "columnName": "food_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Quantity",
+            "columnName": "quantity",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Sum",
+            "columnName": "Total_price",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "fid"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7288401c457455b011ce53794c814484')"
+    ]
+  }
+}

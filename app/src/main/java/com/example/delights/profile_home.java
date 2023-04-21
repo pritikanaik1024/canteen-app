@@ -29,14 +29,22 @@ public class profile_home extends AppCompatActivity {
                 {
                     case R.id.cart_nav:
                         startActivity(new Intent(getApplicationContext(),pay.class));
+                        finish();
                         overridePendingTransition(0,0);
                         break;
                     case R.id.token_nav:
                         startActivity(new Intent(getApplicationContext(),token.class));
+                        finish();
                         overridePendingTransition(0,0);
                         break;
 
                     case R.id.profile_nav:
+                        break;
+
+                    case R.id.home_nav:
+                        startActivity(new Intent(getApplicationContext(),homepage.class));
+                        finish();
+                        overridePendingTransition(0,0);
                         break;
 
                 }

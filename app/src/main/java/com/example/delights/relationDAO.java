@@ -11,21 +11,19 @@ import java.util.List;
 public interface relationDAO {
 
 
+    @Insert
+    void insertall(relation...relation);
 
 
-//    @Query("SELECT * FROM relation")
-//    List<relation> getAll();
+    @Query("SELECT EXISTS(SELECT * FROM relation WHERE fid = :foodid)")
+    Boolean is_exist(int foodid);
 
-//    @Query("SELECT * FROM relation WHERE uid IN (:userIds)")
-//    List<relation> loadAllByIds(int[] userIds);
+    @Query("SELECT * FROM relation")
+    List<relation> getAll_relations();
 
-//    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-//            "last_name LIKE :last LIMIT 1")
-//    User findByName(String first, String last);
+    @Query("DELETE FROM relation WHERE fid = :id")
+    void deletebyId (int id);
 
-//    @Insert
-//    void insertAll(User... users);
-//
-//    @Delete
-//    void delete(User user);
+    @Delete
+    void delete(relation...relation);
 }

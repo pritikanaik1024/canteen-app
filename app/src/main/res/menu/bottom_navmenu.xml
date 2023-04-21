@@ -2,7 +2,9 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
+    <item android:title="Home"
+        android:icon="@drawable/baseline_home_24"
+        android:id="@+id/home_nav"/>
     <item android:title="profile"
         android:icon="@drawable/baseline_person_24"
         android:id="@+id/profile_nav"/>

@@ -4,31 +4,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/red_background"
     tools:context=".pay">
 
-    <TextView
-        android:id="@+id/pay_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="50dp"
-        android:textAlignment="center"
-        android:textColor="#FF5757"
-        android:textColorHint="#FF5757"
-        android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/pay_btn"
-        android:layout_width="167dp"
-        android:layout_height="69dp"
-        android:layout_alignBottom="@+id/pay_id"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="-167dp"
-        android:background="@drawable/button_gradient"
-        android:text="Make Payment" />
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="198dp"
+        app:srcCompat="@drawable/cart_gif" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="50dp"
+        android:layout_marginTop="180dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:id="@+id/cr"
+                android:layout_height="56dp"
+                app:cardElevation="30dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/show_name"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="35dp"
+                        android:text="Food Name"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/show_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Quantity"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/show_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Price"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_3"
+                android:layout_width="match_parent"
+
+                android:layout_height="360dp"
+                android:layout_alignBottom="@+id/cr"
+                android:layout_marginBottom="-360dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                app:cardElevation="30dp"
+                android:layout_alignBottom="@+id/rv_3"
+                android:layout_marginBottom="-124dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="22dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Total: ₹"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/rateview"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="115dp"
+                    android:text="100"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/pay_btn"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="205dp"
+                    android:background="@drawable/button_gradient"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Checkout"
+                    android:textColor="#000000"
+                    app:elevation="60dp" />
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

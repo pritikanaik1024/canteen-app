@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -35,8 +36,11 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
         super(options);
     }
 
-    int Quantity = 0 ;
-    int totalprice = 0;
+    int Quantity = 1 ;
+    int totalprice = 1;
+
+
+
 
 
 
@@ -47,12 +51,14 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
         holder.name.setText(model.getName());
         holder.price.setText(model.getPrice());
 
+
         Glide.with(holder.img.getContext())
                 .load(model.getUri())
                 .placeholder(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark)
                 .circleCrop()
                 .error(com.google.android.gms.base.R.drawable.common_google_signin_btn_icon_dark)
                 .into(holder.img);
+
         holder.add_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +66,11 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
                         .setContentHolder(new ViewHolder(R.layout.add_to_cart_popup))
                         .setExpanded(true, 1100)
                         .create();
+
+
+
+                relation_database db = Room.databaseBuilder(v.getContext(),
+                        relation_database.class, "Food_4").allowMainThreadQueries().build();
 
                 View view = dialogPlus.getHolderView();
                 TextView Food_name = view.findViewById(R.id.cart_food);
@@ -74,6 +85,8 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
                 Food_name.setText(model.getName());
                 Price.setText(model.getPrice());
                 Sum.setText(model.getPrice());
+
+
 
 
 //                Glide.with(holder.cart_img.getContext())
@@ -92,6 +105,7 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
                                 count.setText(String.valueOf(Quantity));
                                 totalprice = Integer.parseInt(model.getPrice()) * Quantity;
                                 Sum.setText(String.valueOf(totalprice));
+                                Food_name.setText(model.getName());
                             }
                         }
                     });
@@ -105,6 +119,7 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
                                 count.setText(String.valueOf(Quantity));
                                 totalprice = Integer.parseInt(model.getPrice()) * Quantity;
                                 Sum.setText(String.valueOf(totalprice));
+                                Food_name.setText(model.getName());
                             }
                         }
                     });
@@ -113,8 +128,12 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
                         @Override
                         public void onClick(View v) {
 
-
-
+                            relationDAO relationdao = db.relationDao();
+                            relationdao.insertall(new relation(Food_name.getText().toString(),Sum.getText().toString(),String.valueOf(Quantity)));
+                            Food_name.setText("");
+                            Quantity = 1;
+                            count.setText(String.valueOf(Quantity));
+                            Sum.setText("");
                             Toast.makeText(holder.name.getContext(), "Item added to Cart", Toast.LENGTH_SHORT).show();
 
                         }
@@ -142,6 +161,8 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
         return new myViewHolder(view);
     }
 
+
+
     static class myViewHolder extends RecyclerView.ViewHolder{
 
         CircleImageView img;
@@ -163,6 +184,9 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
     }
 
     public static class MainModel_admin {
+
+
+
 
 
 
