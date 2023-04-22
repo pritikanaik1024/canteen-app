@@ -1,7 +1,6 @@
 package com.example.delights;
-
-import static com.example.delights.pay.EXTRA_NUMBER;
-
+// NOT IN USE WAS USED FOR TOKEN GENERATION
+//import static com.example.delights.pay.EXTRA_NUMBER;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,8 +58,11 @@ public class token extends AppCompatActivity {
             }
         });
 
-            Intent b = getIntent();
-            String token_no = b.getStringExtra(EXTRA_NUMBER);
-            token.setText(token_no);
+
+
+        // NOT IN USE WAS USED FOR TOKEN GENERATION
+//            Intent b = getIntent();
+//            String token_no = b.getStringExtra(EXTRA_NUMBER);
+//            token.setText(token_no);
     }
 }

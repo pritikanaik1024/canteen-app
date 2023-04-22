@@ -178,7 +178,8 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
             String name = relations.get(i).food_name;
             String Quantity = relations.get(i).quantity;
             i++;
-            databaseReference.child(s).child(String.valueOf(i)).child(name).setValue(Quantity);
+            databaseReference.child(s).child(String.valueOf(i)).child("name").setValue(name);
+            databaseReference.child(s).child(String.valueOf(i)).child("Quantity").setValue(Quantity);
         }
 
         relationdao.deleteall();
