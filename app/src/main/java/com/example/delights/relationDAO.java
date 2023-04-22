@@ -18,6 +18,10 @@ public interface relationDAO {
     @Query("SELECT EXISTS(SELECT * FROM relation WHERE fid = :foodid)")
     Boolean is_exist(int foodid);
 
+
+    @Query("DELETE FROM relation")
+    void deleteall();
+
     @Query("SELECT * FROM relation")
     List<relation> getAll_relations();
 

@@ -80,21 +80,19 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
                 ImageButton sub = view.findViewById(R.id.sub_cart);
                 TextView count = view.findViewById(R.id.count);
                 Button final_add = view.findViewById(R.id.add_final);
-//                CircleImageView cart_img = view.findViewById(R.id.cart_img);
+                CircleImageView cart_img = view.findViewById(R.id.cart_img);
 
                 Food_name.setText(model.getName());
                 Price.setText(model.getPrice());
                 Sum.setText(model.getPrice());
 
 
-
-
-//                Glide.with(holder.cart_img.getContext())
-//                        .load(model.getUri())
-//                        .placeholder(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark)
-//                        .circleCrop()
-//                        .error(com.google.android.gms.base.R.drawable.common_google_signin_btn_icon_dark)
-//                        .into(holder.cart_img);
+                Glide.with(cart_img.getContext())
+                        .load(model.getUri())
+                        .placeholder(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark)
+                        .circleCrop()
+                        .error(com.google.android.gms.base.R.drawable.common_google_signin_btn_icon_dark)
+                        .into(cart_img);
 
 
                 add.setOnClickListener(new View.OnClickListener() {
@@ -114,15 +112,21 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
                         @Override
                         public void onClick(View v) {
 
-                            if (Quantity > 0){
+                            if (Quantity > 1){
                                 Quantity--;
                                 count.setText(String.valueOf(Quantity));
                                 totalprice = Integer.parseInt(model.getPrice()) * Quantity;
                                 Sum.setText(String.valueOf(totalprice));
                                 Food_name.setText(model.getName());
+
                             }
                         }
                     });
+
+
+
+
+
 
                     final_add.setOnClickListener(new View.OnClickListener() {
                         @Override

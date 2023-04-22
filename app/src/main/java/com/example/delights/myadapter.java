@@ -34,7 +34,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myadapter.myviewholder holder, int position) {
+    public void onBindViewHolder(@NonNull myadapter.myviewholder holder, final int position) {
 
         holder.recpname.setText(relations.get(position).getFood_name());
         holder.recpprice.setText(relations.get(position).getSum());
@@ -62,7 +62,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     }
 
 
-    public class myviewholder extends RecyclerView.ViewHolder {
+    public static class myviewholder extends RecyclerView.ViewHolder {
 
         TextView recpname,recpprice,recpqnt;
         ImageButton delbtn;
@@ -79,10 +79,19 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     private void updateprice() {
 
         int sum = 0, i;
-        for (i = 0; i < relations.size(); i++) {
-
-            sum = sum + (Integer.parseInt(relations.get(i).getSum()) * Integer.parseInt(relations.get(i).getQuantity()));
-            rateview.setText(String.valueOf(sum));
+        if (relations.size()==0){
+            sum = 0;
+            rateview.setText(String.valueOf(0));
         }
-    }
+        else {
+
+            for (i = 0; i < relations.size(); i++) {
+
+                sum = sum + (Integer.parseInt(relations.get(i).getSum()) * Integer.parseInt(relations.get(i).getQuantity()));
+                rateview.setText(String.valueOf(sum));
+            }
+        }
+
+        }
+
 }

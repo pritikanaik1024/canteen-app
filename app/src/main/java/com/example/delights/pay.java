@@ -14,21 +14,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class pay extends AppCompatActivity implements PaymentResultListener {
 
-    public static final String EXTRA_NUMBER = "com.example.delights.extra.NUMBER";
+    // NOT IN USE WAS USED FOR TOKEN GENERATION
+//    public static final String EXTRA_NUMBER = "com.example.delights.extra.NUMBER";
 
-//    TextView pay_id ;
+
     RecyclerView recyclerView;
     TextView rateview;
     Button pay_btn ;
@@ -36,8 +42,7 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
     Checkout checkout;
     BottomNavigationView bottomNavigationView;
 
-
-
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
         setContentView(R.layout.activity_pay);
         Checkout.preload(getApplicationContext());
 
-//        pay_id = findViewById(R.id.pay_id);
+
         pay_btn = findViewById(R.id.pay_btn);
         recyclerView = findViewById(R.id.rv_3);
         rateview = findViewById(R.id.rateview);
@@ -108,16 +113,18 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
         myadapter adapter = new myadapter (relations,rateview);
         recyclerView.setAdapter(adapter);
 
-        int sum = 0,i;
-        for (i=0;i<relations.size();i++){
+        int sum = 0, i;
+        if (relations.size()==0){
+            sum = 0;
+            rateview.setText(String.valueOf(0));
+        }
+        else {
 
+            for (i = 0; i < relations.size(); i++) {
 
-            int total = Integer.parseInt(relations.get(i).getSum());
-            int totalq =  Integer.parseInt(relations.get(i).getQuantity());
-            sum += (total*totalq);
-
-            String  final_sum = String.valueOf(sum);
-            rateview.setText(final_sum);
+                sum = sum + (Integer.parseInt(relations.get(i).getSum()) * Integer.parseInt(relations.get(i).getQuantity()));
+                rateview.setText(String.valueOf(sum));
+            }
         }
 
     }
@@ -155,37 +162,53 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
         }
 
 
+
     @Override
     public void onPaymentSuccess(String s) {
-//        pay_id.setText("Congratulations your payment is sucessful and payment id is: "+  s);
-        int token = IncrementingNumber.getNextNumber();
-        String token_number = Integer.toString(token);
-        Intent a = new Intent();
-        a.putExtra(EXTRA_NUMBER,token_number);
+
+        relation_database db = Room.databaseBuilder(getApplicationContext(),
+                relation_database.class, "Food_4").allowMainThreadQueries().build();
+        relationDAO relationdao = db.relationDao();
+        List<relation> relations = relationdao.getAll_relations();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("orders");
+
+        int i = 0;
+        while(i<relations.size()){
+            String name = relations.get(i).food_name;
+            String Quantity = relations.get(i).quantity;
+            i++;
+            databaseReference.child(s).child(String.valueOf(i)).child(name).setValue(Quantity);
+        }
+
+        relationdao.deleteall();
+        getroomdata();
+
+
+     // NOT IN USE WAS USED FOR TOKEN GENERATION
+//        int token = IncrementingNumber.getNextNumber();
+//        String token_number = Integer.toString(token);
+//        Intent a = new Intent();
+//        a.putExtra(EXTRA_NUMBER,token_number);
+
     }
 
     @Override
     public void onPaymentError(int i, String s) {
-//        pay_id.setText("Oops! your payment is unsucessful");
+        Toast.makeText(this, "Oops! your payment is unsuccessful", Toast.LENGTH_SHORT).show();
     }
 
-
-    public static class IncrementingNumber {
-
-        private static int number = 0;
-
-        public static int getNextNumber() {
-            number = number % 100 + 1;
-            return number;
-        }
-
-    }
-
-
-
-
-
-
+// NOT IN USE WAS USED FOR TOKEN GENERATION
+//    public static class IncrementingNumber {
+//
+//        private static int number = 0;
+//
+//        public static int getNextNumber() {
+//            number = number % 100 + 1;
+//            return number;
+//        }
+//
+//    }
 }
 
 

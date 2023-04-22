@@ -99,7 +99,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Total: ₹"
                     android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/rateview"
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="115dp"
-                    android:text="100"
+                    android:text="0"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
