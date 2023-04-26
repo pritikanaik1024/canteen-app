@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red_background">#FF5757</color>
+    <color name="lred_background">#FF9191</color>
 </resources>
