@@ -10,7 +10,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class token extends AppCompatActivity {
 
@@ -24,7 +31,7 @@ public class token extends AppCompatActivity {
         setContentView(R.layout.activity_token);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        token = findViewById(R.id.token);
+        token = findViewById(R.id.token_txt);
 
 
         bottomNavigationView.setSelectedItemId(R.id.token_nav);
@@ -59,6 +66,21 @@ public class token extends AppCompatActivity {
         });
 
 
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseFirestore fdb = FirebaseFirestore.getInstance();
+        Task<DocumentSnapshot> document =  fdb.collection("Orders").document(auth.getUid()).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        token.setText(documentSnapshot.getString("Token"));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
 
         // NOT IN USE WAS USED FOR TOKEN GENERATION
 //            Intent b = getIntent();
