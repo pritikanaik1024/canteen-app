@@ -264,11 +264,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="132dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/red_background"
+                android:background= "@drawable/button_gradient"
                 android:text="EDIT PROFILE"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="15dp"
+                android:elevation="30dp"
 
                 tools:ignore="TextContrastCheck" />
 

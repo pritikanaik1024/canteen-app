@@ -134,10 +134,10 @@ public class User_Menu_Adapter extends FirebaseRecyclerAdapter<MainModel,User_Me
 
                             relationDAO relationdao = db.relationDao();
                             relationdao.insertall(new relation(Food_name.getText().toString(),Sum.getText().toString(),String.valueOf(Quantity)));
-                            Food_name.setText("");
+//                            Food_name.setText("");
                             Quantity = 1;
                             count.setText(String.valueOf(Quantity));
-                            Sum.setText("");
+//                            Sum.setText("");
                             Toast.makeText(holder.name.getContext(), "Item added to Cart", Toast.LENGTH_SHORT).show();
 
                         }
