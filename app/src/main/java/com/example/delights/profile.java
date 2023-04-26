@@ -101,6 +101,7 @@ public class profile extends AppCompatActivity {
         admin_map.put("is_admin","0");
 
 
+
         db.collection("Users").document(auth.getUid()).set(admin_map);
         db.collection("Users").document(auth.getUid()).collection(gr)
                 .document(intent.getStringExtra(Register.EXTRA_NAME)).set(map);

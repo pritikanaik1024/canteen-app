@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
@@ -43,6 +45,8 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
     BottomNavigationView bottomNavigationView;
 
     DatabaseReference databaseReference;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +170,9 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
     @Override
     public void onPaymentSuccess(String s) {
 
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseFirestore fdb = FirebaseFirestore.getInstance();
+
         relation_database db = Room.databaseBuilder(getApplicationContext(),
                 relation_database.class, "Food_4").allowMainThreadQueries().build();
         relationDAO relationdao = db.relationDao();
@@ -184,6 +191,15 @@ public class pay extends AppCompatActivity implements PaymentResultListener {
 
         relationdao.deleteall();
         getroomdata();
+
+        Map<String,Object> token_map = new HashMap<>();
+        token_map.put("Token",s);
+         fdb.collection("Orders").document(auth.getUid()).set(token_map);
+
+
+//        String Token = s;
+//        Intent a = new Intent();
+//        a.putExtra(EXTRA_NUMBER,Token);
 
 
      // NOT IN USE WAS USED FOR TOKEN GENERATION
