@@ -19,24 +19,17 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
-
 
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class  Admin_menu_Adapter extends FirebaseRecyclerAdapter<MainModel,Admin_menu_Adapter.myViewHolder> {
-
-
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     */
+public class Admin_menu_Adapter extends FirebaseRecyclerAdapter<MainModel, Admin_menu_Adapter.myViewHolder> {
 
     public Admin_menu_Adapter(@NonNull FirebaseRecyclerOptions<MainModel> options) {
         super(options);
@@ -59,9 +52,8 @@ public class  Admin_menu_Adapter extends FirebaseRecyclerAdapter<MainModel,Admin
             public void onClick(View v) {
                 final DialogPlus dialogPlus = DialogPlus.newDialog(holder.admin_img.getContext())
                         .setContentHolder(new ViewHolder(R.layout.admin_update_popup))
-                        .setExpanded(true,1250)
+                        .setExpanded(true, 1250)
                         .create();
-
 
                 View view = dialogPlus.getHolderView();
 
@@ -78,18 +70,22 @@ public class  Admin_menu_Adapter extends FirebaseRecyclerAdapter<MainModel,Admin
                 update.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Map<String,Object> map = new HashMap<>();
-                        map.put("name",Food.getText().toString());
-                        map.put("price",Price.getText().toString());
-                        map.put("uri",Url.getText().toString());
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("name", Food.getText().toString());
+                        map.put("price", Price.getText().toString());
+                        map.put("uri", Url.getText().toString());
+
+                        String foodKey = getRef(position).getKey();
 
                         FirebaseDatabase.getInstance().getReference().child("Food")
-                                .child(getRef(position).getKey()).updateChildren(map)
+                                .child(foodKey).updateChildren(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(holder.admin_name.getContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show();
                                         dialogPlus.dismiss();
+                                        // Process transaction after updating the item
+                                        processTransaction(foodKey, "USER123", "Updated"); // Replace "USER123" with actual user ID
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -102,8 +98,7 @@ public class  Admin_menu_Adapter extends FirebaseRecyclerAdapter<MainModel,Admin
                     }
                 });
 
-                 dialogPlus.show();
-
+                dialogPlus.show();
             }
         });
 
@@ -111,48 +106,58 @@ public class  Admin_menu_Adapter extends FirebaseRecyclerAdapter<MainModel,Admin
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(holder.admin_name.getContext());
-                builder.setTitle("Are you sure for Deletion?");
+                builder.setTitle("Are you sure you want to delete?");
                 builder.setMessage("Deleted data cannot be retrieved");
 
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        String foodKey = getRef(position).getKey();
 
                         FirebaseDatabase.getInstance().getReference().child("Food")
-                                .child(getRef(position).getKey()).removeValue();
-
+                                .child(foodKey).removeValue()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(holder.admin_name.getContext(), "Deleted Successfully!", Toast.LENGTH_SHORT).show();
+                                        // Process transaction after deleting the item
+                                        processTransaction(foodKey, "USER123", "Deleted"); // Replace "USER123" with actual user ID
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(holder.admin_name.getContext(), "Deletion Failed!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     }
                 });
+
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(holder.admin_name.getContext(), "Item not Deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(holder.admin_name.getContext(), "Item not deleted", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.show();
             }
         });
-
-
     }
-
 
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_admin_recycler,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_admin_recycler, parent, false);
         return new myViewHolder(view);
     }
 
-
-    static class myViewHolder extends RecyclerView.ViewHolder{
+    static class myViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView admin_img;
         TextView admin_name;
         TextView admin_price;
         Button update;
         Button delete;
-
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -162,53 +167,52 @@ public class  Admin_menu_Adapter extends FirebaseRecyclerAdapter<MainModel,Admin
             admin_price = itemView.findViewById(R.id.admin_price);
             update = itemView.findViewById(R.id.update);
             delete = itemView.findViewById(R.id.delete);
-
         }
     }
 
-    public static class MainModel_user {
+    private void processTransaction(String transactionId, String userId, String action) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        Map<String, Object> transactionMap = new HashMap<>();
+        transactionMap.put("transactionId", transactionId);
+        transactionMap.put("status", action);
 
+        databaseReference.child("Transactions").child(transactionId)
+                .setValue(transactionMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        updateUserTransactionStatus(userId, transactionId, action);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(admin_name.getContext(), "Error processing transaction", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
-        String name,price,uri;
+    private void updateUserTransactionStatus(String userId, String transactionId, String status) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        Map<String, Object> userUpdate = new HashMap<>();
+        userUpdate.put("transactionId", transactionId);
+        userUpdate.put("status", status);
 
-        MainModel_user()
-        {
-
-
-        }
-
-        public MainModel_user(String name, String price, String uri) {
-            this.name = name;
-            this.price = price;
-            this.uri = uri;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setPrice(String price) {
-            this.price = price;
-        }
-
-        public void setUri(String uri) {
-            this.uri = uri;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getPrice() {
-            return price;
-        }
-
-        public String getUri() {
-            return uri;
-        }
-
-
+        databaseReference.child("Users").child(userId).child("transactions").child(transactionId)
+                .updateChildren(userUpdate)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(admin_name.getContext(), "User transaction status updated", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(admin_name.getContext(), "Error updating user transaction status", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
