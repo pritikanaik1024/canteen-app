@@ -24,77 +24,83 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 public class Login extends AppCompatActivity {
-    // Firebase link
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    // Firebase instances
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // field declarations
+
+        // Initialize UI elements
         EditText email = findViewById(R.id.login_email);
         EditText password = findViewById(R.id.login_password);
-        Button login_2 = findViewById(R.id.login_button);
+        Button loginButton = findViewById(R.id.login_button);
 
-        login_2.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email_check = email.getText().toString();
-                String password_check = password.getText().toString();
+                String emailInput = email.getText().toString().trim();
+                String passwordInput = password.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email_check)) {
-                    Toast.makeText(Login.this, "Please enter a valid email used for registration", Toast.LENGTH_SHORT).show();
-                }
-                if (TextUtils.isEmpty(password_check)) {
-                    Toast.makeText(Login.this, "Please enter a valid password used during registration", Toast.LENGTH_SHORT).show();
-                } else {
-                    login(email_check, password_check);
+                if (validateInput(emailInput, passwordInput)) {
+                    login(emailInput, passwordInput);
                 }
             }
         });
     }
 
-    public void login(String email, String password) {
+    private boolean validateInput(String email, String password) {
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(Login.this, "Please enter your email.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(Login.this, "Please enter your password.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void login(String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    checkadmin();
+                    checkAdmin();
                 } else {
-                    Toast.makeText(Login.this, "Login unsuccessful , Please register yourself to login!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "Login unsuccessful. Please check your credentials or register.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-
-    public  void checkadmin() {
-        DocumentReference df = db.collection("Users").document(auth.getUid());
-        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-
+    private void checkAdmin() {
+        DocumentReference userDoc = db.collection("Users").document(auth.getUid());
+        userDoc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
-
-                if (Objects.equals(documentSnapshot.getString("is_admin"),"1")) {
-                    Intent b = new Intent(Login.this, admin_dashboard.class);
-                    startActivity(b);
-                    finish();
-                    Toast.makeText(Login.this, "successfully logged in as Admin", Toast.LENGTH_SHORT).show();
-
-                }
-                if (Objects.equals(documentSnapshot.getString("is_admin"), "0")) {
-                    Intent a = new Intent(Login.this, post_login.class);
-                    startActivity(a);
-                    finish();
-                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                if (documentSnapshot.exists()) {
+                    String isAdmin = documentSnapshot.getString("is_admin");
+                    if (Objects.equals(isAdmin, "1")) {
+                        navigateTo(AdminDashboard.class, "Successfully logged in as Admin");
+                    } else if (Objects.equals(isAdmin, "0")) {
+                        navigateTo(PostLogin.class, "Login Successful");
+                    } else {
+                        Toast.makeText(Login.this, "User role is not defined", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(Login.this, "User data not found", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-
+    private void navigateTo(Class<?> destination, String message) {
+        Intent intent = new Intent(Login.this, destination);
+        startActivity(intent);
+        finish();
+        Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
+    }
 }
-
-

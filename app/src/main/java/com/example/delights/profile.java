@@ -21,92 +21,86 @@ import java.util.Map;
 
 public class profile extends AppCompatActivity {
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // All declarations
-        EditText profile_Name = findViewById(R.id.profile_name);
-        EditText profile_number = findViewById(R.id.profile_number);
-        AutoCompleteTextView atv = findViewById(R.id.profile_branch);
-        TextView email = findViewById(R.id.profile_email);
-        Button save = findViewById(R.id.profile_button);
-        EditText profile_gr = findViewById(R.id.profile_gr_number);
+        // Field declarations
+        EditText profileName = findViewById(R.id.profile_name);
+        EditText profileNumber = findViewById(R.id.profile_number);
+        AutoCompleteTextView branchAutoComplete = findViewById(R.id.profile_branch);
+        TextView emailTextView = findViewById(R.id.profile_email);
+        Button saveButton = findViewById(R.id.profile_button);
+        EditText profileGRNumber = findViewById(R.id.profile_gr_number);
 
-       // set autofill for branch
-        String [] Branch = new String[]
-                {"AI-DS_FE","AI-DS_SE","AI-DS_TE","AI-DS_BE",
-                        "COMPS_FE","COMPS_SE","COMPS_TE","COMPS_BE",
-                        "CIVIL_FE","CIVIL_SE","CIVIL_TE","CIVIL_BE",
-                        "MECH_FE","MECH_SE","MECH_TE","MECH_BE",
-                        "CHEM_FE","CHEM_SE","CHEM_TE","CHEM_BE", "CIVIL-INFRA_FE","CIVIL-INFRA_SE","CIVIL-INFRA_TE","CIVIL-INFRA_BE", "IT_FE","IT_SE","IT_TE","IT_BE", "ELEC_FE","ELEC_SE","ELEC_TE","ELEC_BE" };
+        // Set autofill for branch
+        String[] branches = new String[] {
+                "AI-DS_FE", "AI-DS_SE", "AI-DS_TE", "AI-DS_BE",
+                "COMPS_FE", "COMPS_SE", "COMPS_TE", "COMPS_BE",
+                "CIVIL_FE", "CIVIL_SE", "CIVIL_TE", "CIVIL_BE",
+                "MECH_FE", "MECH_SE", "MECH_TE", "MECH_BE",
+                "CHEM_FE", "CHEM_SE", "CHEM_TE", "CHEM_BE",
+                "CIVIL-INFRA_FE", "CIVIL-INFRA_SE", "CIVIL-INFRA_TE", "CIVIL-INFRA_BE",
+                "IT_FE", "IT_SE", "IT_TE", "IT_BE",
+                "ELEC_FE", "ELEC_SE", "ELEC_TE", "ELEC_BE"
+        };
+        branchAutoComplete.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, branches));
 
-        atv.setAdapter(new ArrayAdapter<String>(profile.this, android.R.layout.simple_list_item_1,Branch));
-        // set email from register to this activity without changes using textview
-
+        // Set email from Register activity
         Intent intent = getIntent();
-        String profile_email = intent.getStringExtra(Register.EXTRA_NAME);
-        email.setText(profile_email);
+        String profileEmail = intent.getStringExtra(Register.EXTRA_NAME);
+        emailTextView.setText(profileEmail);
 
-        //Conditions to check if the name and number is empty or not
-        save.setOnClickListener(new View.OnClickListener() {
+        // Save button click listener
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                String name = profile_Name.getText().toString();
-                String number= profile_number.getText().toString();
-                String gr = profile_gr.getText().toString();
+            public void onClick(View v) {
+                String name = profileName.getText().toString();
+                String number = profileNumber.getText().toString();
+                String gr = profileGRNumber.getText().toString();
 
-
-                if(TextUtils.isEmpty(name)||TextUtils.isEmpty(number)||TextUtils.isEmpty(gr))
-                {
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(number) || TextUtils.isEmpty(gr)) {
                     Toast.makeText(profile.this, "Please provide valid details", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     Intent a = new Intent(profile.this, Fetch.class);
                     startActivity(a);
                     finish();
                     DocumentCreate();
-                    Toast.makeText(profile.this, "Your profile have been created successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(profile.this, "Your profile has been created successfully", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-    // FirebaseFirestore link of profile
-    public void DocumentCreate() {
 
+    // Firebase Firestore link of profile
+    private void DocumentCreate() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String uid = auth.getUid();
-        EditText profile_Name = findViewById(R.id.profile_name);
-        EditText profile_number = findViewById(R.id.profile_number);
-        AutoCompleteTextView atv = findViewById(R.id.profile_branch);
-        EditText profile_gr_number = findViewById(R.id.profile_gr_number);
-        String name = profile_Name.getText().toString();
-        String number= profile_number.getText().toString();
-        String gr = profile_gr_number.getText().toString();
+        EditText profileName = findViewById(R.id.profile_name);
+        EditText profileNumber = findViewById(R.id.profile_number);
+        AutoCompleteTextView branchAutoComplete = findViewById(R.id.profile_branch);
+        EditText profileGRNumber = findViewById(R.id.profile_gr_number);
+        String name = profileName.getText().toString();
+        String number = profileNumber.getText().toString();
+        String gr = profileGRNumber.getText().toString();
         Intent intent = getIntent();
-        String branch = atv.getText().toString();
+        String branch = branchAutoComplete.getText().toString();
 
-        Map<String,Object> map = new HashMap<>();
-        map.put("name",name);
-        map.put("Roll Number",number);
-        map.put("GR Number",gr);
-        map.put("email",intent.getStringExtra(Register.EXTRA_NAME));
-        map.put("Branch",branch);
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("Roll Number", number);
+        map.put("GR Number", gr);
+        map.put("email", intent.getStringExtra(Register.EXTRA_NAME));
+        map.put("Branch", branch);
 
-        Map<String, String> admin_map = new HashMap<>();
-        admin_map.put("is_admin","0");
+        Map<String, String> adminMap = new HashMap<>();
+        adminMap.put("is_admin", "0");
 
-
-
-        db.collection("Users").document(auth.getUid()).set(admin_map);
-        db.collection("Users").document(auth.getUid()).collection(gr)
+        db.collection("Users").document(uid).set(adminMap);
+        db.collection("Users").document(uid).collection(gr)
                 .document(intent.getStringExtra(Register.EXTRA_NAME)).set(map);
-
-
-//        FirebaseFirestore.getInstance().collection("Profile Information").add(map);
     }
 }

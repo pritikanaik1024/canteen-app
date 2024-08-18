@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,41 +22,38 @@ public class homepage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        // Initialize BottomNavigationView
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.cart_nav:
                         startActivity(new Intent(getApplicationContext(), pay.class));
-                        finish();
-                        overridePendingTransition(1, 1);
-                        break;
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        return true;
                     case R.id.token_nav:
                         startActivity(new Intent(getApplicationContext(), token.class));
-                        finish();
-                        overridePendingTransition(1, 1);
-                        break;
-
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        return true;
                     case R.id.profile_nav:
                         startActivity(new Intent(getApplicationContext(), profile_home.class));
-                        finish();
-                        overridePendingTransition(1, 1);
-                        break;
-
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        return true;
                     case R.id.home_nav:
-                        break;
-
+                        // No action needed, current activity is homepage
+                        return true;
                 }
-
+                return false;
             }
         });
 
-
-
+        // Initialize RecyclerView
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Setup FirebaseRecyclerOptions
         FirebaseRecyclerOptions<MainModel> options =
                 new FirebaseRecyclerOptions.Builder<MainModel>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Food"), MainModel.class)
@@ -65,8 +61,6 @@ public class homepage extends AppCompatActivity {
 
         user_menu_adapter = new User_Menu_Adapter(options);
         recyclerView.setAdapter(user_menu_adapter);
-
-
     }
 
     @Override
