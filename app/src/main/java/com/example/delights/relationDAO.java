@@ -10,14 +10,11 @@ import java.util.List;
 @Dao
 public interface relationDAO {
 
-
     @Insert
-    void insertall(relation...relation);
-
+    void insertall(relation... relations);
 
     @Query("SELECT EXISTS(SELECT * FROM relation WHERE fid = :foodid)")
     Boolean is_exist(int foodid);
-
 
     @Query("DELETE FROM relation")
     void deleteall();
@@ -26,8 +23,8 @@ public interface relationDAO {
     List<relation> getAll_relations();
 
     @Query("DELETE FROM relation WHERE fid = :id")
-    void deletebyId (int id);
+    void deletebyId(int id);
 
     @Delete
-    void delete(relation...relation);
+    void delete(relation... relations);
 }

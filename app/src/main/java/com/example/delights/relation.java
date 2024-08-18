@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class relation {
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     public int fid;
 
     @ColumnInfo(name = "food_name")
@@ -15,6 +15,17 @@ public class relation {
     @ColumnInfo(name = "Total_price")
     public String sum;
 
+    @ColumnInfo(name = "quantity")
+    public String quantity;
+
+    // Constructor
+    public relation(String food_name, String sum, String quantity) {
+        this.food_name = food_name;
+        this.sum = sum;
+        this.quantity = quantity;
+    }
+
+    // Getters and setters
     public int getFid() {
         return fid;
     }
@@ -46,15 +57,4 @@ public class relation {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
-
-    public relation(String food_name, String sum, String quantity) {
-        this.fid = fid;
-        this.food_name = food_name;
-        this.sum = sum;
-        this.quantity = quantity;
-    }
-
-    @ColumnInfo(name = "quantity")
-    public String quantity;
-
 }

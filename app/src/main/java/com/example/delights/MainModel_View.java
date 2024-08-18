@@ -2,48 +2,34 @@ package com.example.delights;
 
 public class MainModel_View {
 
-    String name,Quantity ;
+    private String name;
+    private String quantity;
 
-    MainModel_View()
-    {
-
-
+    // Default constructor required for Firebase
+    public MainModel_View() {
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public String getQuantity() {
-        return Quantity;
-    }
-
+    // Parameterized constructor
     public MainModel_View(String name, String quantity) {
         this.name = name;
-        Quantity = quantity;
+        this.quantity = quantity;
+    }
+
+    // Getter and Setter for name
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setQuantity(String quantity) {
-        Quantity = quantity;
+    // Getter and Setter for quantity
+    public String getQuantity() {
+        return quantity;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
 }

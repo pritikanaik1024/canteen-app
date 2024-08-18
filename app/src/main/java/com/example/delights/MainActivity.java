@@ -1,6 +1,5 @@
 package com.example.delights;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,52 +10,61 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseAuth auth = FirebaseAuth.getInstance();
- Handler h = new Handler();
+    private FirebaseAuth auth;
+    private Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-         h.postDelayed(new Runnable() {
-           @Override
-          public void run() {
-         Intent a = new Intent(MainActivity.this,Fetch.class);
-           startActivity(a);
-           finish();
+
+        auth = FirebaseAuth.getInstance();
+        handler = new Handler();
+
+        // Delay for splash screen effect
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                checkUserStatus();
             }
-          },2000);
+        }, 2000);
     }
 
-    // When app is ready and is used for login
-    // issue that the user has already deleted from the database yet it is allowing to login
-    // check on that
+    private void checkUserStatus() {
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            // User is signed in, verify if the user still exists in the database
+            checkIfUserExists(currentUser.getUid());
+        } else {
+            // No user is signed in, navigate to Fetch activity
+            navigateTo(Fetch.class);
+        }
+    }
 
-   // @Override
-   // protected void onStart() {
-   //     super.onStart();
-   //     FirebaseUser authCurrentUser = auth.getCurrentUser();
-   //     if(authCurrentUser!=null){
-  //          h.postDelayed(new Runnable() {
-  //              @Override
-   //             public void run() {
-   //                 Intent a = new Intent(MainActivity.this,Homescreen.class);
-  //                  startActivity(a);
-  //                  finish();
-   //             }
-  //          },2000);
+    private void checkIfUserExists(String userId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(userId).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (task.getResult().exists()) {
+                            // User exists in the database, navigate to Homescreen
+                            navigateTo(Homescreen.class);
+                        } else {
+                            // User does not exist, sign out and navigate to Fetch activity
+                            auth.signOut();
+                            navigateTo(Fetch.class);
+                        }
+                    } else {
+                        // Error occurred while checking user, navigate to Fetch activity
+                        auth.signOut();
+                        navigateTo(Fetch.class);
+                    }
+                });
+    }
 
-   //     }
-    //    else{
-   //         h.postDelayed(new Runnable() {
-   //             @Override
-   //             public void run() {
-   //                 Intent a = new Intent(MainActivity.this,Fetch.class);
-   //                 startActivity(a);
-   //                 finish();
-   //             }
-    //        },2000);
-  //      }
-
-   // }
-
+    private void navigateTo(Class<?> destination) {
+        Intent intent = new Intent(MainActivity.this, destination);
+        startActivity(intent);
+        finish();
+    }
 }
